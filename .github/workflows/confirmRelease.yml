@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 14
       - name: Git config
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -25,9 +25,19 @@ jobs:
           yarn install
       - name: Release Dry run
         run: |
-          yarn release --dry-run
+          echo "\`\`\`
+          $(yarn release --dry-run)
+          \`\`\`" >> /tmp/result.txt
       - name: Push branch
         run: |
           git checkout -b release-candidate
           git push origin release-candidate
+      - name: Create issue
+        id: create-issue
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: Release candidate
+          content-filepath: /tmp/result.txt
+          labels: release candidate
+
 

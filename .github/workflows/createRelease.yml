@@ -42,4 +42,5 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           title: 'chore(release): ${{ env.NEW_TAG }}'
+          branch: 'merge-release-${{ env.NEW_TAG }}'
 

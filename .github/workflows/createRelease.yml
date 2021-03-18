@@ -27,17 +27,16 @@ jobs:
         run: yarn changelog
       - name: Push release
         run: |
-          echo "TAG=$(git describe)" >> $GITHUB_ENV
-          git push origin ${{ env.TAG }}
+          git push origin $NEW_TAG
           git checkout master
-          git cherry-pick ${{ env.TAG }}
+          git cherry-pick $NEW_TAG
       - name: Create Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.TAG }}
-          release_name: ${{ env.TAG }}
+          tag_name: ${{ env.NEW_TAG }}
+          release_name: ${{ env.NEW_TAG }}
           body_path: ./CURRENT_CHANGELOG.md
       - name: Craete Pull Request
         uses: peter-evans/create-pull-request@v3

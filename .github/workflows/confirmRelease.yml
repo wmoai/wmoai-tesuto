@@ -22,12 +22,26 @@ jobs:
           BASE_TAG=v$(npx -c 'echo "$npm_package_version"')
           git checkout $BASE_TAG
           git merge --no-edit ${{ github.ref }}
+          echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
           yarn install
       - name: Release Dry run
-        run: |
-          yarn release --dry-run
+        run: yarn release --dry-run > /tmp/result.txt
       - name: Push branch
         run: |
           git checkout -b release-candidate
           git push origin release-candidate
+      - name: Create issue
+        id: create-issue
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: Release candidate
+          content-filepath: /tmp/result.txt
+          labels: release-candidate
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ steps.create-issue.outputs.issue-number }}
+          body: 'Commit: ${{ env.COMMIT }}'
+
+
 

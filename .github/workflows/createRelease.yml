@@ -1,0 +1,33 @@
+name: create release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+      - name: Git config
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+      - name: Prepare release
+        run: |
+          BASE_TAG=v$(npx -c 'echo "$npm_package_version"')
+          git checkout $BASE_TAG
+          git merge --no-edit ${{ github.ref }}
+      - name: Release commit
+        run: |
+          yarn release
+          echo "NEW_TAG=$(git describe)" >> $GITHUB_ENV
+      - name: Push branch
+        run: |
+          git checkout -b release-candidate-$NEW_TAG
+          git push origin release-candidate-$NEW_TAG
+

@@ -1,0 +1,44 @@
+name: publish release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          registry-url: 'https://registry.npmjs.org'
+      - name: Git config
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+      - run: yarn install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Push release
+        run: |
+          echo "TAG=$(git describe)" >> $GITHUB_ENV
+          echo "CHANGELOG=$(yarn changelog)" >> $GITHUB_ENV
+          git push origin ${{ github.ref }}
+          git checkout master
+          git cherry-pick ${{ github.ref }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: ${{ env.CHANGELOG }}
+      - name: Craete Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'chore(release): ${{ github.ref }}'
+

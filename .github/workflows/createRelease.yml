@@ -41,10 +41,11 @@ jobs:
         with:
           tag_name: ${{ env.NEW_TAG }}
           release_name: ${{ env.NEW_TAG }}
-          body_path: ./CURRENT_CHANGELOG.md
+          body_path: /tmp/CURRENT_CHANGELOG.md
       - name: Craete Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           title: 'chore(release): ${{ env.NEW_TAG }}'
           branch: 'merge-release-${{ env.NEW_TAG }}'
-
+      - name: Delete branch
+        run: git push origin :release-candidate

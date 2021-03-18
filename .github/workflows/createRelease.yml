@@ -23,12 +23,11 @@ jobs:
           git checkout $BASE_TAG
           git merge --no-edit ${{ github.ref }}
           yarn install
-      - name: Release commit
+      - name: Release Dry run
         run: |
-          yarn release
-          echo "NEW_TAG=$(git describe)" >> $GITHUB_ENV
+          yarn release --dry-run
       - name: Push branch
         run: |
-          git checkout -b release-candidate-$NEW_TAG
-          git push origin release-candidate-$NEW_TAG
+          git checkout -b release-candidate
+          git push origin release-candidate
 

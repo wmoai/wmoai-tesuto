@@ -1,15 +1,15 @@
-name: publish release
+name: exit test
 
 on:
   workflow_dispatch:
 
 jobs:
-  publish_release:
+  exit_test:
     runs-on: ubuntu-latest
     steps:
       - run: |
-        echo This branch is not release-candidate.
-        exit 1
-        if: contains(github.ref, 'release-candidate')
+          echo This branch is not release-candidate.
+          exit 1
+        if: !contains(github.ref, 'release-candidate')
       - run: echo This is correct
 

@@ -16,11 +16,16 @@ stream.on('data', (chunk) => {
   const prevHeader = matched[1]
   const prevHeaderIndex = buffer.indexOf(prevHeader)
   const currentChangelog = buffer.slice(0, prevHeaderIndex - 1)
-  console.log(currentChangelog)
+  fs.writeFileSync(`${__dirname}/../CURRENT_CHANGELOG.md`, currentChangelog)
   stream.destroy()
+})
+
+stream.on('error', (err) => {
+  throw err
 })
 
 stream.on('end', () => {
   // This will only runs if two version headers are not found.
-  console.log(buffer)
+  fs.writeFileSync(`${__dirname}/../CURRENT_CHANGELOG.md`, buffer)
 })
+

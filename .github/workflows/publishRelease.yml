@@ -19,26 +19,27 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - run: yarn install
+      - neme: Create CHANGELOG
+        run: yarn changelog
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push release
         run: |
           echo "TAG=$(git describe)" >> $GITHUB_ENV
-          echo "CHANGELOG=$(yarn changelog)" >> $GITHUB_ENV
-          git push origin ${{ github.ref }}
+          git push origin $TAG
           git checkout master
-          git cherry-pick ${{ github.ref }}
+          git cherry-pick $TAG
       - name: Create Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: ${{ env.CHANGELOG }}
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.TAG }}
+          body_path: ./CURRENT_CHANGELOG.md
       - name: Craete Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          title: 'chore(release): ${{ github.ref }}'
+          title: 'chore(release): ${{ env.TAG }}'
 

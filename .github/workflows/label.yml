@@ -7,7 +7,7 @@ on:
 
 jobs:
   confirm_label:
-    if github.event.label.name == 'approve release' && contains(github.event.issue.labels.*.name, 'release candidate')
+    if: github.event.label.name == 'approve release' && contains(github.event.issue.labels.*.name, 'release candidate')
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.event.label.name }}

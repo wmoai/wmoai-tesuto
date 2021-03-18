@@ -25,7 +25,7 @@ jobs:
           echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
           yarn install
       - name: Release Dry run
-        run: {
+        run: |
           echo "\`\`\`
           $(yarn release --dry-run)
           \`\`\`

@@ -28,9 +28,9 @@ jobs:
       - name: Push release
         run: |
           echo "TAG=$(git describe)" >> $GITHUB_ENV
-          git push origin $TAG
+          git push origin ${{ env.TAG }}
           git checkout master
-          git cherry-pick $TAG
+          git cherry-pick ${{ env.TAG }}
       - name: Create Release
         uses: actions/create-release@v1
         env:

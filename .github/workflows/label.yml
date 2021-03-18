@@ -1,0 +1,15 @@
+name: label
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  confirm_label:
+    if github.event.label.name == 'approve release' && contains(github.event.issue.labels.*.name, 'release candidate')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.label.name }}
+      - run: echo ${{ github.event.issue.labels }}
+

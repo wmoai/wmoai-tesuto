@@ -25,7 +25,12 @@ jobs:
           echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
           yarn install
       - name: Release Dry run
-        run: yarn release --dry-run > /tmp/result.txt
+        run: {
+          echo "\`\`\`
+          $(yarn release --dry-run)
+          \`\`\`
+
+          Commit: ${{ env.COMMIT }}" >> /tmp/result.txt
       - name: Push branch
         run: |
           git checkout -b release-candidate
@@ -36,12 +41,6 @@ jobs:
         with:
           title: Release candidate
           content-filepath: /tmp/result.txt
-          labels: release-candidate
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ steps.create-issue.outputs.issue-number }}
-          body: 'Commit: ${{ env.COMMIT }}'
-
+          labels: release candidate
 
 

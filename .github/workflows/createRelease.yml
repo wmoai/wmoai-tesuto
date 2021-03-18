@@ -1,18 +1,22 @@
 name: create release
 
 on:
-  workflow_dispatch:
+  issues:
+    types:
+      - labeled
 
 jobs:
   create_release:
+    if: github.event.label.name == 'approve release' && contains(github.event.issue.labels.*.name, 'release candidate')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: release-candidate
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 14
           registry-url: 'https://registry.npmjs.org'
       - name: Git config
         run: |

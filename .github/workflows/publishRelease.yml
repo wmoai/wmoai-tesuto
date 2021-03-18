@@ -21,9 +21,6 @@ jobs:
       - run: yarn install
       - neme: Create CHANGELOG
         run: yarn changelog
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push release
         run: |
           echo "TAG=$(git describe)" >> $GITHUB_ENV

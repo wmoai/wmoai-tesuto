@@ -1,4 +1,4 @@
-name: delete release candidate branch
+name: close release candidate
 
 on:
   issues:
@@ -6,7 +6,7 @@ on:
       - closed
 
 jobs:
-  delete_release_candidate_branch:
+  close_release_candidate:
     if: contains(github.event.issue.labels.*.name, 'release candidate')
     runs-on: ubuntu-latest
     steps:

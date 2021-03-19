@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/wmoai/wmoai-tesuto/compare/v1.2.4...v1.3.0) (2021-03-19)
+
+
+### Features
+
+* improve release workflow ([bed7a78](https://github.com/wmoai/wmoai-tesuto/commit/bed7a78668f6ee3ec2d5c7f5b7297c1f8706dc2e))
+
 ### [1.2.4](https://github.com/wmoai/wmoai-tesuto/compare/v1.2.3...v1.2.4) (2021-03-19)
 
 

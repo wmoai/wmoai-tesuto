@@ -30,7 +30,7 @@ jobs:
           yarn release
           echo "NEW_TAG=$(git describe)" >> $GITHUB_ENV
       - name: Create CHANGELOG
-        run: echo "CHANGELOG=$(npx ts-node ./scripts/changelog.ts)" > ${{ env.CHANGELOG_PATH }}
+        run: npx ts-node ./scripts/changelog.ts > ${{ env.CHANGELOG_PATH }}
       - name: Push Release
         run: |
           git push origin $NEW_TAG

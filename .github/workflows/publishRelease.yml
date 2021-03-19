@@ -25,7 +25,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - run: yarn install
-      - run: echo BASE_TAG=v$(npx -c 'echo "$npm_package_version"') >> GITHUB_ENV
+      - run: echo BASE_TAG=v$(npx -c 'echo "$npm_package_version"') >> $GITHUB_ENV
       - name: Release commit
         run: |
           yarn release
@@ -52,3 +52,6 @@ jobs:
           branch: 'merge-release-${{ env.NEW_TAG }}'
       - name: Close Issue
         uses: peter-evans/close-issue@v1
+      - name: Delete Branch
+        run: git push origin :release-candidate
+

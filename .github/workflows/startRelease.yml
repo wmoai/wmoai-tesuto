@@ -1,10 +1,10 @@
-name: confirm release
+name: start release
 
 on:
   workflow_dispatch:
 
 jobs:
-  confirm_release:
+  start_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,26 +13,26 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - name: Git config
+      - name: Git Config
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-      - name: Prepare release
+      - name: Prepare Release
         run: |
           BASE_TAG=v$(npx -c 'echo "$npm_package_version"')
           git checkout $BASE_TAG
           git merge --no-edit ${{ github.ref }}
           yarn install
-      - name: Release Dry run
+      - name: Release Dry Run
         run: |
           echo "\`\`\`
           $(yarn release --dry-run)
           \`\`\`" >> /tmp/result.txt
-      - name: Push branch
+      - name: Push Branch
         run: |
           git checkout -b release-candidate
           git push origin release-candidate
-      - name: Create issue
+      - name: Create Issue
         id: create-issue
         uses: peter-evans/create-issue-from-file@v2
         with:

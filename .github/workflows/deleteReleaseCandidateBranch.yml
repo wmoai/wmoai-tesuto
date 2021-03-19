@@ -1,0 +1,16 @@
+name: delete release candidate branch
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  delete_release_candidate_branch:
+    if: contains(github.event.issue.labels.*.name, 'release candidate')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Delete Branch
+        run: git push origin :release-candidate
+

@@ -49,7 +49,5 @@ jobs:
         with:
           title: 'chore(release): ${{ env.NEW_TAG }}'
           branch: 'merge-release-${{ env.NEW_TAG }}'
-      - name: Delete Branch
-        run: git push origin :release-candidate
       - name: Close issue
         uses: peter-evans/close-issue@v1

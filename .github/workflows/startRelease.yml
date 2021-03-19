@@ -6,6 +6,8 @@ on:
 jobs:
   start_release:
     runs-on: ubuntu-latest
+    env:
+      RESULT_PATH: /tmp/result.txt
     steps:
       - uses: actions/checkout@v2
         with:
@@ -25,9 +27,10 @@ jobs:
           yarn install
       - name: Release Dry Run
         run: |
-          echo "\`\`\`
+          echo "Dry Run Log:
+          \`\`\`
           $(yarn release --dry-run)
-          \`\`\`" >> /tmp/result.txt
+          \`\`\`" >> ${{ env.RESULT_PATH }}
       - name: Push Branch
         run: |
           git checkout -b release-candidate
@@ -37,7 +40,7 @@ jobs:
         uses: peter-evans/create-issue-from-file@v2
         with:
           title: Release candidate
-          content-filepath: /tmp/result.txt
+          content-filepath: ${{ env.RESULT_PATH }}
           labels: release candidate
 
 

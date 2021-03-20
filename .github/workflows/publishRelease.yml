@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: release-candidate
+          ref: release-candidatea
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:

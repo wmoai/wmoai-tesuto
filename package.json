@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "standard-version",
+    "release:dryrun": "standard-version --dry-run",
     "changelog": "ts-node scripts/changelog.ts"
   },
   "keywords": [],

@@ -10,7 +10,7 @@ on:
 
 jobs:
   start_release:
-    if: contains(['normal', 'prerelease'], github.event.inputs.mode)
+    if: github.event.inputs.mode == 'normal' || github.event.inputs.mode == 'prerelease'
     runs-on: ubuntu-latest
     env:
       RESULT_PATH: /tmp/result.txt

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RESULT_PATH: /tmp/result.txt
-      IS_PRERELEASE: github.event.inputs.mode === 'prerelease'
+      IS_PRERELEASE: ${{ github.event.inputs.mode == 'prerelease' }}
     steps:
       - uses: actions/checkout@v2
         with:

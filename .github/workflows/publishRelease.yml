@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CHANGELOG_PATH: /tmp/CHANGELOG.md
-      IS_PRERELEASE: contains(github.event.issue.labels.*.name, 'prerelease')
+      IS_PRERELEASE: ${{ contains(github.event.issue.labels.*.name, 'prerelease') }}
     steps:
       - uses: actions/checkout@v2
         with:

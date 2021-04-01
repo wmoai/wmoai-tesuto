@@ -33,10 +33,10 @@ jobs:
           git merge --no-edit ${{ github.ref }}
       - run: yarn install
       - name: release dry run
-        if: github.env.IS_PRERELEASE == false
+        if: ${{ env.IS_PRERELEASE == false }}
         run: yarn release:dryrun > ${{ env.RESULT_PATH }}
       - name: prerelease dry run
-        if: github.env.IS_PRERELEASE == true
+        if: ${{ env.IS_PRERELEASE == true }}
         run: yarn release:dryrun --prerelease > ${{ env.RESULT_PATH }}
       - name: wrap result
         run: |
@@ -49,10 +49,10 @@ jobs:
           git checkout -b release-candidate
           git push origin release-candidate
       - name: release issue labels
-        if: github.env.IS_PRERELEASE == false
+        if: ${{ env.IS_PRERELEASE == false }}
         run: echo ISSUE_LABELS='release candidate' >> $GITHUB_ENV
       - name: prerelease issue labels
-        if: github.env.IS_PRERELEASE == true
+        if: ${{ env.IS_PRERELEASE == true }}
         run: echo ISSUE_LABELS='release candidate, prerelease' >> $GITHUB_ENV
       - name: create issue
         uses: peter-evans/create-issue-from-file@v2

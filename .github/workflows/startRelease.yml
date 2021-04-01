@@ -5,7 +5,8 @@ on:
     inputs:
       mode:
         description: 'select release mode, "normal" or "prerelease".'
-        required: true default: ''
+        required: true
+        default: ''
 
 jobs:
   start_release:

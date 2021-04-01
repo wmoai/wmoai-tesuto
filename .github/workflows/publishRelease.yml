@@ -7,7 +7,10 @@ on:
 
 jobs:
   publish_release:
-    if: github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'release candidate') && github.event.label.name == 'approve release'
+    if:
+      github.event.issue.state == 'open'
+      && contains(github.event.issue.labels.*.name, 'release candidate')
+      && github.event.label.name == 'approve release'
     runs-on: ubuntu-latest
     env:
       CHANGELOG_PATH: /tmp/CHANGELOG.md
@@ -25,6 +28,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - run: yarn install
+      - run: echo BASE_TAG=v$(npx -c 'echo "$npm_package_version"') >> $GITHUB_ENV
       - run: yarn release
       - run: npm publish
         env:
@@ -35,7 +39,7 @@ jobs:
       - name: cherry-pick release commit
         run: |
           git checkout master
-          git cherry-pick $NEW_TAG
+          git cherry-pick $BASE_TAG^...$NEW_TAG
       - name: craete pull request
         uses: peter-evans/create-pull-request@v3
         with:

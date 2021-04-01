@@ -42,4 +42,3 @@ jobs:
           content-filepath: ${{ env.RESULT_PATH }}
           labels: release candidate
 
-

@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-0](https://github.com/wmoai/wmoai-tesuto/compare/v1.3.1...v2.0.0-0) (2021-04-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* new release
+
+### Bug Fixes
+
+* fix release ([0daa077](https://github.com/wmoai/wmoai-tesuto/commit/0daa07704010a86c41f1fb4ce433410afb36f7e5))
+* fix release ([978ef9d](https://github.com/wmoai/wmoai-tesuto/commit/978ef9de9a12c34c675bddc60191c91aeab80287))
+* fix release ([ff32d62](https://github.com/wmoai/wmoai-tesuto/commit/ff32d625b980e0a192390a052e213e5378c21a30))
+* fix release ([676994f](https://github.com/wmoai/wmoai-tesuto/commit/676994f1de6a7a2e57ca920a3ee36be82e210bfd))
+* fix release ([0c97c12](https://github.com/wmoai/wmoai-tesuto/commit/0c97c12af5667735da5230111301e86cdda4da50))
+* fix release ([476a6e8](https://github.com/wmoai/wmoai-tesuto/commit/476a6e8de41c1f1be3fa1b9278b4c65048362b7f))
+* fix release ([9c6b7cc](https://github.com/wmoai/wmoai-tesuto/commit/9c6b7cc729a66a9e8cf3a88e610bec11c9255357))
+* fix release ([e599617](https://github.com/wmoai/wmoai-tesuto/commit/e5996172f069e0575a0bbefe41fb9d7dc32c443f))
+* fix release cherry pick ([dab9d07](https://github.com/wmoai/wmoai-tesuto/commit/dab9d07b5d56f7efa689a838b745d082a699d2a0))
+* modify readme ([0d4c1aa](https://github.com/wmoai/wmoai-tesuto/commit/0d4c1aa9d1fad8f624fe5e3e22a6cf6eb14a688f))
+* revert release ([05f6a7d](https://github.com/wmoai/wmoai-tesuto/commit/05f6a7deb13d5aa06427547c62a240b6dadf6296))
+
 ### [1.3.1](https://github.com/wmoai/wmoai-tesuto/compare/v1.3.0...v1.3.1) (2021-03-20)
 
 

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/wmoai/wmoai-tesuto/compare/v2.0.0...v2.0.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* fix latest changelog for prerelease ([d29f7bf](https://github.com/wmoai/wmoai-tesuto/commit/d29f7bfefe9bcab36dc2230725161052ce0b836a))
+
 ## [2.0.0](https://github.com/wmoai/wmoai-tesuto/compare/v2.0.0-0...v2.0.0) (2021-04-02)
 
 ## [2.0.0-0](https://github.com/wmoai/wmoai-tesuto/compare/v1.3.1...v2.0.0-0) (2021-04-01)

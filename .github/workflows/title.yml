@@ -12,7 +12,7 @@ jobs:
       - name: check title
         id: check-title
         run: |
-          if [[ ${{ github.event.title }} =~ ^(feat|fix|docs|chore|style|refactor|perf|test):\s.*$ ]]; then
+          if [[ ${{ github.event.pull_request.title }} =~ ^(feat|fix|docs|chore|style|refactor|perf|test):\s.*$ ]]; then
               echo ::set-output name=match::true
           fi
       - name: exit

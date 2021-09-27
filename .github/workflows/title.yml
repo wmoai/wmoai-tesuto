@@ -16,6 +16,6 @@ jobs:
               echo ::set-output name=ok::true
           fi
       - run: exit 1
-        if: steps.check-tag.outputs.ok != 'true'
+        if: steps.check-title.outputs.ok != 'true'
         
 

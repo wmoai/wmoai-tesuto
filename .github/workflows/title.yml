@@ -13,9 +13,9 @@ jobs:
         id: check-title
         run: |
           if [[ "${{ github.event.pull_request.title }}" =~ ^(feat|fix|docs|chore|style|refactor|perf|test)!?:\s.*$ ]]; then
-              echo ::set-output name=match::true
+              echo ::set-output name=ok::true
           fi
       - run: exit 1
-        if: steps.check-tag.outputs.match == 'true'
+        if: steps.check-tag.outputs.ok != 'true'
         
 

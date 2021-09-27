@@ -12,7 +12,10 @@ jobs:
       - name: check title
         id: check-title
         run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ ${{ github.event.title }} =~ ^(feat|fix|docs|chore|style|refactor|perf|test):\s.*$ ]]; then
               echo ::set-output name=match::true
           fi
+      - name: exit
+        if: steps.check-tag.outputs.match == 'true'
+        run: exit 1
 

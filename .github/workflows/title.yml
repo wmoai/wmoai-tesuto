@@ -1,18 +1,17 @@
-name: title check
-
+name: Title Check
 
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 
 jobs:
-  title_lint:
+  conventional_commits:
     runs-on: ubuntu-latest
     steps:
       - name: check title
         id: check-title
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^(feat|fix|docs|chore|style|refactor|perf|test)!?:[^\S] ]]; then
+          if [[ "${{ github.event.pull_request.title }}" =~ ^(feat|fix|docs|chore|style|refactor|perf|test)!?:\s ]]; then
               echo ::set-output name=ok::true
           fi
       - run: exit 1

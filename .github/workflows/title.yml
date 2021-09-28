@@ -9,12 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check title
-        id: check-title
         run: |
           if [[ "${{ github.event.pull_request.title }}" =~ ^(feat|fix|docs|chore|style|refactor|perf|test)!?:[[:space:]] ]]; then
               echo ::set-output name=ok::true
+          else
+              echo "エラーです"
+              exit 1
           fi
-      - run: exit 1
-        if: steps.check-title.outputs.ok != 'true'
-        
 

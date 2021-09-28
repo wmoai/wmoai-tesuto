@@ -14,6 +14,7 @@ jobs:
               echo ::set-output name=ok::true
           else
               echo "エラーです"
+              echo "::error::エラー"
               exit 1
           fi
 

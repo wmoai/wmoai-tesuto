@@ -49,6 +49,7 @@ jobs:
         with:
           title: 'chore(release): ${{ env.NEW_TAG }}'
           branch: 'merge-release-${{ env.NEW_TAG }}'
+          base: 'master'
       - name: create release on GitHub
         uses: actions/create-release@v1
         env:

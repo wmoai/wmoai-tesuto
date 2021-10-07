@@ -4,17 +4,24 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'select release mode, "normal" or "prerelease".'
+        description: 'リリースモードを入力 "normal" or "prerelease"'
         required: true
         default: ''
+      branch_operation:
+        description: 'ブランチの合流を自動で行う場合は "auto" 、予め手動で行っている場合は "manual" を入力'
+        required: true
+        default: 'auto'
 
 jobs:
   start_release:
-    if: github.event.inputs.mode == 'normal' || github.event.inputs.mode == 'prerelease'
+    if: |
+      (github.event.inputs.mode == 'normal' || github.event.inputs.mode == 'prerelease')
+      && (github.event.inputs.branch_operation == 'auto' || github.event.inputs.branch_operation == 'manual')
     runs-on: ubuntu-latest
     env:
       RESULT_PATH: /tmp/result.txt
       IS_PRERELEASE: ${{ github.event.inputs.mode == 'prerelease' }}
+      NO_PREPARATION: ${{ github.event.inputs.branch_operation == 'manual' }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,6 +34,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - name: prepare release
+        if: ${{ env.NO_PREPARATION == 'false' }}
         run: |
           BASE_TAG=v$(npx -c 'echo "$npm_package_version"')
           git checkout $BASE_TAG

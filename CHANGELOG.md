@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.0.3](https://github.com/wmoai/wmoai-tesuto/compare/v2.0.2...v2.0.3) (2021-10-05)
 
+* change releasing
+
 ### [2.0.2](https://github.com/wmoai/wmoai-tesuto/compare/v2.0.1...v2.0.2) (2021-10-05)
 
 

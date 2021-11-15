@@ -8,14 +8,7 @@ on:
         description: 'プレリリース'
       manual_preparation:
         type: boolean 
-        description: 'リリースタグとの合流を手動で行う'
-      hoge:
-        type: choice
-        description: 'fuga'
-        options:
-          - test1
-          - test2
-          - test3
+        description: '前リリースタグとの合流を手動で行う'
 
 jobs:
   start_release:
